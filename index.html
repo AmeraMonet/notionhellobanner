@@ -1,57 +1,87 @@
-<html> 
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>Greeting Message</title> 
-    <style>
-#lbl {
-    font-family: monospace;
-    font-size: xx-large;
-    color: #626262;
-    padding: 5px;
-    border: 1px solid #ececec;
-    text-align: center;
-    line-height: 1.5;
-    height:85%
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Greeting Message</title>
 
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      background-color: darkgreen;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: Garamond, "EB Garamond", Georgia, serif;
+    }
 
-}
-#date{
-    font-size:large;
-}
-body{
-    background-color: darkgreen;
-}
-    </style>
+    #lbl {
+      width: 100%;
+      text-align: center;
+      color: white;
+      line-height: 1.5;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+    #greeting {
+      font-size: 36px;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+    }
+
+    #date {
+      margin-top: 10px;
+      font-size: 18px;
+      opacity: 0.9;
+    }
+  </style>
 </head>
+
 <body>
-    <div id="lbl"></div>
-</body>
+
+<div id="lbl">
+  <div id="greeting"></div>
+  <div id="date"></div>
+</div>
 
 <script>
-    var weekday = new Array(7);
-    weekday[0] = "Sunday";
-    weekday[1] = "Monday";
-    weekday[2] = "Tuesday";
-    weekday[3] = "Wednesday";
-    weekday[4] = "Thursday";
-    weekday[5] = "Friday";
-    weekday[6] = "Saturday";
+const weekdays = [
+  "Sunday",
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday"
+];
 
-    
-    var today = new Date();
-    var hrs = today.getHours();
-    var dayOfWeek = weekday[today.getDay()];
-    var date = dayOfWeek+" " + today.getDate() + "/" +(today.getMonth()+1) +'/'+today.getFullYear()  ;
+const today = new Date();
+const hrs = today.getHours();
 
-    var greet;
+let greeting = "";
 
-    if (hrs < 12)
-        greet = 'Good Morning  ';
-    else if (hrs >= 12 && hrs <= 17)
-        greet = 'Good Afternoon ';
-    else if (hrs >= 17 && hrs <= 24)
-        greet = 'Good Evening  ';
+if (hrs < 12) {
+  greeting = "Good Morning";
+} else if (hrs < 18) {
+  greeting = "Good Afternoon";
+} else {
+  greeting = "Good Evening";
+}
 
-    document.getElementById('lbl').innerHTML =
-        greet+= "Amera " +`<div id="date"> It's ${date}</div>`;
-</script> 
+const date = `${weekdays[today.getDay()]}, ${today.toLocaleDateString("en-US", {
+  month: "long",
+  day: "numeric",
+  year: "numeric"
+})}`;
+
+document.getElementById("greeting").textContent = `${greeting}, Amera`;
+document.getElementById("date").textContent = date;
+</script>
+
+</body>
 </html>
